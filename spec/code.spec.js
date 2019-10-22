@@ -30,7 +30,7 @@ describe('code test', () => {
       await action.process.call(self, {}, { code });
       const result = emitter.emit.getCall(0).args[1];
       expect(result.body.name).equal('Name');
-      const testEnv = process.env.TEST_ENV || 'test';
+      const testEnv = process.env.TEST_ENV;
       expect(testEnv).equal('test');
     });
   });
