@@ -2,6 +2,7 @@
 const chai = require('chai');
 const sinon = require('sinon');
 const logger = require('@elastic.io/component-logger')();
+const { handlebars } = require('hbs');
 const action = require('../actions/code');
 
 const { expect } = chai;
@@ -9,6 +10,15 @@ const { expect } = chai;
 let emitter;
 let self;
 let code;
+
+function getValueFromEnv(key) {
+  const compiled = handlebars.compile(key);
+  const value = compiled(process.env);
+  if (value) {
+    return value;
+  }
+  throw new Error('No value is defined for environment variable');
+}
 
 describe('code test', () => {
   beforeEach(() => {
@@ -30,6 +40,8 @@ describe('code test', () => {
       await action.process.call(self, {}, { code });
       const result = emitter.emit.getCall(0).args[1];
       expect(result.body.name).equal('Name');
+      const testEnv = getValueFromEnv('TEST_ENV');
+      expect(testEnv).equal('TEST_ENV');
     });
   });
 
