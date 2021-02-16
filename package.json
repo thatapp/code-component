@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "description": "elastic.io code component",
   "engines": {
-    "node": "^10"
+    "node": ">=12.13.0"
   },
   "scripts": {
     "docker:build": "docker build -t elasticio/code-component:$(git log -n1 --format=%H) .",
@@ -24,8 +24,9 @@
     "co-request": "1.0.0",
     "dateformat": "^3.0.3",
     "elasticio-node": "0.0.9",
-    "elasticio-sailor-nodejs": "2.4.2",
+    "elasticio-sailor-nodejs": "2.6.24",
     "mongodb": "^3.3.4",
+    "tedious": "^11.0.3",
     "uuid": "^8.3.1"
   },
   "devDependencies": {
